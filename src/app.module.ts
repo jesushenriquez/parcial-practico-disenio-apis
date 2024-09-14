@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AerolineaModule } from './aerolinea/aerolinea.module';
+import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
 
 @Module({
   imports: [
@@ -14,7 +16,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'parcial-practico',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-  })],
+  }),
+    AerolineaModule,
+    AeropuertoModule],
   controllers: [AppController],
   providers: [AppService],
 })
