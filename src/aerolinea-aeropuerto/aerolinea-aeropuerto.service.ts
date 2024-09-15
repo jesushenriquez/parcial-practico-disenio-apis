@@ -51,7 +51,9 @@ export class AerolineaAeropuertoService {
     });
     if (!aerolinea) throw new NotFoundException('Aerolínea no encontrada');
 
-    const aeropuerto = aerolinea.aeropuertos.find((a) => a.id === aeropuertoId);
+    const aeropuerto = aerolinea.aeropuertos.find(
+      (a) => a.id === Number(aeropuertoId),
+    );
     if (!aeropuerto)
       throw new NotFoundException(
         'El aeropuerto no está asociado a la aerolínea',
@@ -90,7 +92,7 @@ export class AerolineaAeropuertoService {
     if (!aerolinea) throw new NotFoundException('Aerolínea no encontrada');
 
     const aeropuertoIndex = aerolinea.aeropuertos.findIndex(
-      (a) => a.id === aeropuertoId,
+      (a) => a.id === Number(aeropuertoId),
     );
     if (aeropuertoIndex === -1)
       throw new NotFoundException(
