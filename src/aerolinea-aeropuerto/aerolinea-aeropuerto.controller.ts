@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Param,
+  Body,
+} from '@nestjs/common';
 import { AerolineaAeropuertoService } from './aerolinea-aeropuerto.service';
 
 @Controller('airlines')
 export class AerolineaAeropuertoController {
-  constructor(private readonly aerolineaAeropuertoService: AerolineaAeropuertoService) {}
+  constructor(
+    private readonly aerolineaAeropuertoService: AerolineaAeropuertoService,
+  ) {}
 
   @Post(':aerolineaId/airports/:aeropuertoId')
   addAirportToAirline(
@@ -48,6 +58,9 @@ export class AerolineaAeropuertoController {
     @Param('aerolineaId') aerolineaId: number,
     @Param('aeropuertoId') aeropuertoId: number,
   ) {
-    return this.aerolineaAeropuertoService.deleteAirportFromAirline(aerolineaId, aeropuertoId);
+    return this.aerolineaAeropuertoService.deleteAirportFromAirline(
+      aerolineaId,
+      aeropuertoId,
+    );
   }
 }

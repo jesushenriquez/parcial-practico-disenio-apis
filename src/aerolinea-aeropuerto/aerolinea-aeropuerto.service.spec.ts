@@ -44,9 +44,15 @@ describe('AerolineaAeropuertoService', () => {
       ],
     }).compile();
 
-    service = module.get<AerolineaAeropuertoService>(AerolineaAeropuertoService);
-    aerolineaRepository = module.get<Repository<Aerolinea>>(getRepositoryToken(Aerolinea));
-    aeropuertoRepository = module.get<Repository<Aeropuerto>>(getRepositoryToken(Aeropuerto));
+    service = module.get<AerolineaAeropuertoService>(
+      AerolineaAeropuertoService,
+    );
+    aerolineaRepository = module.get<Repository<Aerolinea>>(
+      getRepositoryToken(Aerolinea),
+    );
+    aeropuertoRepository = module.get<Repository<Aeropuerto>>(
+      getRepositoryToken(Aeropuerto),
+    );
   });
 
   it('debería estar definido', () => {
@@ -143,7 +149,9 @@ describe('AerolineaAeropuertoService', () => {
       const nuevosAeropuertos = [aeropuerto];
 
       jest.spyOn(aerolineaRepository, 'findOne').mockResolvedValue(aerolinea);
-      jest.spyOn(aeropuertoRepository, 'findByIds').mockResolvedValue(nuevosAeropuertos);
+      jest
+        .spyOn(aeropuertoRepository, 'findByIds')
+        .mockResolvedValue(nuevosAeropuertos);
       jest.spyOn(aerolineaRepository, 'save').mockResolvedValue({
         ...aerolinea,
         aeropuertos: nuevosAeropuertos,
@@ -179,7 +187,9 @@ describe('AerolineaAeropuertoService', () => {
       });
       jest.spyOn(aerolineaRepository, 'save').mockResolvedValue(aerolinea);
 
-      await expect(service.deleteAirportFromAirline(1, 1)).resolves.toBeUndefined();
+      await expect(
+        service.deleteAirportFromAirline(1, 1),
+      ).resolves.toBeUndefined();
     });
 
     it('debería lanzar NotFoundException si la aerolínea no existe', async () => {

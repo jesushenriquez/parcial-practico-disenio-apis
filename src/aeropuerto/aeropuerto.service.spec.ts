@@ -49,7 +49,9 @@ describe('AeropuertoService', () => {
     }).compile();
 
     service = module.get<AeropuertoService>(AeropuertoService);
-    repository = module.get<Repository<Aeropuerto>>(getRepositoryToken(Aeropuerto));
+    repository = module.get<Repository<Aeropuerto>>(
+      getRepositoryToken(Aeropuerto),
+    );
   });
 
   it('debería estar definido', () => {
@@ -160,7 +162,9 @@ describe('AeropuertoService', () => {
     it('debería lanzar NotFoundException si el aeropuerto no existe', async () => {
       jest
         .spyOn(service, 'findOne')
-        .mockRejectedValue(new NotFoundException('El aeropuerto con ID 1 no existe'));
+        .mockRejectedValue(
+          new NotFoundException('El aeropuerto con ID 1 no existe'),
+        );
 
       const aeropuertoData = {
         nombre: 'Aeropuerto Nuevo',

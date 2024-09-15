@@ -160,7 +160,9 @@ describe('AerolineaService', () => {
     it('debería lanzar NotFoundException si la aerolínea no existe', async () => {
       jest
         .spyOn(service, 'findOne')
-        .mockRejectedValue(new NotFoundException('La aerolínea con ID 1 no existe'));
+        .mockRejectedValue(
+          new NotFoundException('La aerolínea con ID 1 no existe'),
+        );
 
       const aerolineaData = {
         nombre: 'Aerolínea Nueva',
@@ -186,7 +188,9 @@ describe('AerolineaService', () => {
     it('debería lanzar NotFoundException si la aerolínea no existe', async () => {
       jest
         .spyOn(service, 'findOne')
-        .mockRejectedValue(new NotFoundException('La aerolínea con ID 1 no existe'));
+        .mockRejectedValue(
+          new NotFoundException('La aerolínea con ID 1 no existe'),
+        );
 
       await expect(service.delete(1)).rejects.toThrow(
         new NotFoundException('La aerolínea con ID 1 no existe'),
