@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AerolineaModule } from './aerolinea/aerolinea.module';
 import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
+import { AerolineaAeropuertoModule } from './aerolinea-aeropuerto/aerolinea-aeropuerto.module';
 
 @Module({
   imports: [
@@ -16,9 +17,11 @@ import { AeropuertoModule } from './aeropuerto/aeropuerto.module';
       database: 'parcial-practico',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
-  }),
+    }),
     AerolineaModule,
-    AeropuertoModule],
+    AeropuertoModule,
+    AerolineaAeropuertoModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
