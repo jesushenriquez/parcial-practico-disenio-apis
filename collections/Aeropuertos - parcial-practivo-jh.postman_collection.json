@@ -1,0 +1,386 @@
+{
+	"info": {
+		"_postman_id": "5dae58f5-f86e-4f84-b023-75c2944c864d",
+		"name": "Aeropuertos - parcial-practivo-jh",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10850197"
+	},
+	"item": [
+		{
+			"name": "Obtener todas los aeropuertos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 200 OK\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Respuesta es un array\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData).to.be.an('array');",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/airports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un aeropuerto por Id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 200 OK\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"El aeropuerto tiene el ID correcto\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData.id).to.eql(1);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/airports/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un aeropuerto por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 404 Not Found\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Mensaje de error correcto\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData.message).to.include(\"El aeropuerto con ID 9999 no existe\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/airports/9999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un aeropuerto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 201 Creado\", function () {",
+							"  pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Aeropuerto Internacional\",\n    \"codigo\": \"ABC\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogotá\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/airports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un aeropuerto inválido",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 400 Bad Request\", function () {",
+							"  pm.response.to.have.status(400);",
+							"});",
+							"pm.test(\"Mensaje de error correcto\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData.message).to.include(\"El código del aeropuerto debe tener exactamente 3 caracteres\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Aeropuerto Inválido\",\n    \"codigo\": \"ABCDE\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Medellín\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/airports",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar un aeropuerto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 200 OK\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Código actualizado\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData.codigo).to.eql(\"XYZ\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Aeropuerto Actualizado\",\n    \"codigo\": \"XYZ\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Cali\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/airports/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar un aeropuerto con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 404 Not Found\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Mensaje de error correcto\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData.message).to.include(\"El aeropuerto con ID 9999 no existe\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Aeropuerto Inexistente\",\n    \"codigo\": \"DEF\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Barranquilla\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/airports/9999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un aeropuerto por su ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 200 OK\", function () {",
+							"  pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/airports/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar un aeropuerto con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Estado 404 Not Found\", function () {",
+							"  pm.response.to.have.status(404);",
+							"});",
+							"pm.test(\"Mensaje de error correcto\", function () {",
+							"  var jsonData = pm.response.json();",
+							"  pm.expect(jsonData.message).to.include(\"El aeropuerto con ID 9999 no existe\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/airports/9999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"airports",
+						"9999"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
