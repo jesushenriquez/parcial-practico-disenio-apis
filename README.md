@@ -22,6 +22,13 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+## Consideraciones
+
+Por favor antes de ejecutar el proyecto tenga en cuenta que se necesita tener instalado docker y docker compose en su maquina, si no los tiene instalados por favor instalelos antes de ejecutar el proyecto. Adicionalmente, para que el proyecto ejecute correctamente es necesario ejecutar el archivo docker-compose.yml que ejecutara una base de datos postgresql:
+```
+docker-compose up -d
+```
+
 ## Description
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
